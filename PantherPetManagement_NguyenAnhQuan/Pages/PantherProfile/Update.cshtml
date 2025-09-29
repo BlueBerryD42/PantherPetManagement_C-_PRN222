@@ -1,0 +1,60 @@
+﻿@page
+@model PantherPetManagement_NguyenAnhQuan.Pages.PantherProfile.UpdateModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PantherProfile</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Input.PantherProfileId" />
+            <div class="form-group">
+                <label asp-for="Input.PantherTypeId" class="control-label"></label>
+                <select asp-for="Input.PantherTypeId" class="form-control" asp-items="Model.TypeItems"></select>
+                <span asp-validation-for="Input.PantherTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PantherName" class="control-label"></label>
+                <input asp-for="Input.PantherName" class="form-control" />
+                <span asp-validation-for="Input.PantherName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Weight" class="control-label"></label>
+                <input asp-for="Input.Weight" class="form-control" />
+                <span asp-validation-for="Input.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Characteristics" class="control-label"></label>
+                <input asp-for="Input.Characteristics" class="form-control" />
+                <span asp-validation-for="Input.Characteristics" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Warning" class="control-label"></label>
+                <input asp-for="Input.Warning" class="form-control" />
+                <span asp-validation-for="Input.Warning" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Input.ModifiedDate" class="control-label"></label>
+                <input asp-for="Input.ModifiedDate" class="form-control" />
+                <span asp-validation-for="Input.ModifiedDate" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} 

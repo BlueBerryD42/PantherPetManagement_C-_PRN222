@@ -1,0 +1,97 @@
+﻿@page
+@model PantherPetManagement_NguyenAnhQuan.Pages.PantherProfile.IndexModel
+@{
+    ViewData["Title"] = "Panther Profiles";
+}
+
+<h2>List of Panther Profiles</h2>
+
+<form method="post" asp-page="/PantherProfile/Search" class="row g-2 mb-4">
+    <div class="col-auto">
+        <input asp-for="SearchWeight"
+               placeholder="Weight"
+               class="form-control" />
+    </div>
+    <div class="col-auto">
+        <input asp-for="SearchTypeName"
+               placeholder="Panther Type Name"
+               class="form-control" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </div>
+    @if (Model.IsManager)
+    {
+        <div class="col-auto">
+            <a asp-page="/PantherProfile/Create" class="btn btn-success">Create New</a>
+        </div>
+    }
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Weight</th>
+            <th>Warning</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Profiles)
+        {
+            <tr id="profile-row-@item.PantherProfileId">
+                <td>@item.PantherProfileId</td>
+                <td>@item.PantherName</td>
+                <td>@item.PantherTypes.PantherTypeName</td>
+                <td>@item.Weight</td>
+                <td>@item.Warning</td>
+                <td>@item.ModifiedDate</td>
+                <td>
+                    <form method="post" asp-page-handler="ViewDetail" style="display:inline">
+                        <input type="hidden" name="PantherId" value="@item.PantherProfileId" />
+                        <button type="submit" class="btn btn-info btn-sm">Detail</button>
+                    </form>
+                    @if (Model.IsManager)
+                    {
+                        <form method="post" asp-page-handler="EditRedirect" style="display:inline">
+                            <input type="hidden" name="PantherId" value="@item.PantherProfileId" />
+                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                        </form>
+                        <form method="post" asp-page-handler="DeleteRedirect" style="display:inline">
+                            <input type="hidden" name="PantherId" value="@item.PantherProfileId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.TotalPages > 1)
+{
+    <form method="post" id="paginationForm">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.Pages ? "active" : "")">
+                        <button type="submit" class="page-link" name="Pages" value="@i">@i</button>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </form>
+}
+
+<div data-is-manager="@Model.IsManager.ToString().ToLower()" data-realtime-updates="true" style="display:none;"></div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script src="~/js/site.js"></script>
+}
+

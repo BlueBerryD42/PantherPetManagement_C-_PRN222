@@ -1,0 +1,49 @@
+﻿@page "/PantherProfile/Create"
+@model PantherPetManagement_NguyenAnhQuan.Pages.PantherProfile.CreateModel
+@{
+    ViewData["Title"] = "Create PantherProfile";
+}
+
+<h2>Create PantherProfile</h2>
+
+<form method="post" class="mt-4">
+
+    <div class="mb-3">
+        <label asp-for="Input.PantherTypeId" class="form-label"></label>
+        <select asp-for="Input.PantherTypeId" class="form-select" asp-items="Model.TypeItems">
+            <option value="">-- Select Type --</option>
+        </select>
+        <span asp-validation-for="Input.PantherTypeId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.PantherName" class="form-label"></label>
+        <input asp-for="Input.PantherName" class="form-control" />
+        <span asp-validation-for="Input.PantherName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Weight" class="form-label"></label>
+        <input asp-for="Input.Weight" class="form-control" />
+        <span asp-validation-for="Input.Weight" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Characteristics" class="form-label"></label>
+        <textarea asp-for="Input.Characteristics" class="form-control"></textarea>
+        <span asp-validation-for="Input.Characteristics" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Warning" class="form-label"></label>
+        <textarea asp-for="Input.Warning" class="form-control"></textarea>
+        <span asp-validation-for="Input.Warning" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-page="./Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

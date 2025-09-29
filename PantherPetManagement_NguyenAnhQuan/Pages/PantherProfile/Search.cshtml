@@ -1,0 +1,58 @@
+﻿@page
+@model PantherPetManagement_NguyenAnhQuan.Pages.PantherProfile.SearchModel
+
+@{
+    ViewData["Title"] = "Search panther Profiles";
+}
+
+<h2>Search panther Profiles</h2>
+
+<form method="post" class="row g-2 mb-4">
+    <div class="col-auto">
+        <input asp-for="SearchWeight"
+               placeholder="Weight"
+               class="form-control" />
+    </div>
+    <div class="col-auto">
+        <input asp-for="SearchTypeName"
+               placeholder="panther Type Name"
+               class="form-control" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </div>
+    <div class="col-auto">
+        <a asp-page="/pantherProfile/Index" class="btn btn-outline-secondary">Back to List</a>
+    </div>
+</form>
+
+@if (Model.Profiles != null && Model.Profiles.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Weight</th>
+                <th>Modified</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Profiles)
+            {
+                <tr>
+                    <td>@item.PantherProfileId</td>
+                    <td>@item.PantherName</td>
+                    <td>@item.PantherTypes.PantherTypeName</td>
+                    <td>@item.Weight</td>
+                    <td>@item.ModifiedDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model.Profiles != null)
+{
+    <div class="alert alert-info">No results found.</div>
+} 
